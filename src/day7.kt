@@ -23,13 +23,13 @@ class IP(ip: String) {
     private fun getCorrespondingBAB(aba: String) = aba.substring(1, 2) + aba.substring(0, 1) + aba.substring(1, 2)
 
     private fun hasABBA(sequence: String): Boolean =
-        (0 .. sequence.lastIndex - 3).any{ index ->
-            sequence[index] == sequence[index + 3] && sequence[index + 1] == sequence[index + 2] && sequence[index] != sequence[index + 1]
+        (0 .. sequence.lastIndex - 3).map { index -> sequence.substring(index, index + 4) }.any{ substring ->
+            substring[0] == substring[3] && substring[1] == substring[2] && substring[0] != substring[1]
         }
 
     private fun getABAs(sequence: String): List<String> =
-        (0 .. sequence.lastIndex - 2).map { index -> sequence.substring(index, index + 3) }.filter {
-            it[0] == it[2] && it[0] != it[1]
+        (0 .. sequence.lastIndex - 2).map { index -> sequence.substring(index, index + 3) }.filter { substring ->
+            substring[0] == substring[2] && substring[0] != substring[1]
         }
 }
 
