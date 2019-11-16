@@ -1,18 +1,24 @@
+package day11
+
 fun main() {
-    val firstFloor = Floor(setOf(
-        Item("polonium", ItemType.GENERATOR),
-        Item("thulium", ItemType.GENERATOR),
-        Item("thulium", ItemType.MICROCHIP),
-        Item("promethium", ItemType.GENERATOR),
-        Item("ruthenium", ItemType.GENERATOR),
-        Item("ruthenium", ItemType.MICROCHIP),
-        Item("cobalt", ItemType.GENERATOR),
-        Item("cobalt", ItemType.MICROCHIP)
-    ))
-    val secondFloor = Floor(setOf(
-        Item("polonium", ItemType.MICROCHIP),
-        Item("promethium", ItemType.MICROCHIP)
-    ))
+    val firstFloor = Floor(
+        setOf(
+            Item("polonium", ItemType.GENERATOR),
+            Item("thulium", ItemType.GENERATOR),
+            Item("thulium", ItemType.MICROCHIP),
+            Item("promethium", ItemType.GENERATOR),
+            Item("ruthenium", ItemType.GENERATOR),
+            Item("ruthenium", ItemType.MICROCHIP),
+            Item("cobalt", ItemType.GENERATOR),
+            Item("cobalt", ItemType.MICROCHIP)
+        )
+    )
+    val secondFloor = Floor(
+        setOf(
+            Item("polonium", ItemType.MICROCHIP),
+            Item("promethium", ItemType.MICROCHIP)
+        )
+    )
     val floors = listOf(firstFloor, secondFloor, Floor(), Floor())
     println(getNeededSteps(FloorPlan(floors)))
 }
