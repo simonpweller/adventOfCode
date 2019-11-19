@@ -39,29 +39,32 @@ private class IncrementInstruction(override val instruction: String): Instructio
     }
 }
 
-private class JumpInstruction(override val instruction: String): Instruction, OffsetInstruction {
+private class JumpInstruction(val instruction: String): Instruction {
     override fun execute(computer: Computer) {
         computer.jump(offset)
     }
+
+    val offset: Int
+        get() = instruction.substringAfter(" ").toInt()
 }
 
-private class JumpIfEvenInstruction(override val instruction: String): Instruction, OffsetInstruction, RegisterInstruction {
+private class JumpIfEvenInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
         if (computer.getRegister(register).isEven()) computer.jump(offset)
     }
 
-    override val offset: Int
+    val offset: Int
         get() = instruction.substringAfter(", ").toInt()
 
     private fun Int.isEven(): Boolean = this % 2 == 0
 }
 
-private class JumpIfOneInstruction(override val instruction: String): Instruction, OffsetInstruction, RegisterInstruction {
+private class JumpIfOneInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
         if (computer.getRegister(register) == 1) computer.jump(offset)
     }
 
-    override val offset: Int
+    val offset: Int
         get() = instruction.substringAfter(", ").toInt()
 }
 
@@ -69,10 +72,4 @@ private interface RegisterInstruction {
     val instruction: String
     val register: String
         get() = instruction.substringAfter(" ").substring(0, 1)
-}
-
-private interface OffsetInstruction {
-    val instruction: String
-    val offset: Int
-        get() = instruction.substringAfter(" ").toInt()
 }

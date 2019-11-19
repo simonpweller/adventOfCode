@@ -19,13 +19,13 @@ private fun readInstruction(instruction: String): Instruction = when(instruction
     else -> throw IllegalArgumentException("Unknown instruction type")
 }
 
-interface RegisterInstruction {
+private interface RegisterInstruction {
     val instruction: String
     val register: String
         get() = instruction.substringAfter(" ").substring(0, 1)
 }
 
-interface InputInstruction {
+private interface InputInstruction {
     val instruction: String
     fun getInput(computer: Computer): Int {
         val input = instruction.substringAfter(" ").substringBefore(" ")

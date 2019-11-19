@@ -20,25 +20,25 @@ fun Computer.execute(instruction: Instruction): Computer {
     return this
 }
 
-fun readInstruction(instruction: String): Instruction = when(instruction.substringAfter(" ").substringBefore(" ")) {
+private fun readInstruction(instruction: String): Instruction = when(instruction.substringAfter(" ").substringBefore(" ")) {
     "inc" -> ConditionalIncrementInstruction(instruction)
     "dec" -> ConditionalDecrementInstruction(instruction)
     else -> throw IllegalArgumentException("Unknown instruction type")
 }
 
-class ConditionalDecrementInstruction(override val instruction: String) : Instruction, ConditionalInstruction {
+private class ConditionalDecrementInstruction(override val instruction: String) : Instruction, ConditionalInstruction {
     override fun execute(computer: Computer) {
         if (condition.evaluate(computer)) computer.operateOnRegister(register) {it - amount}
     }
 }
 
-class ConditionalIncrementInstruction(override val instruction: String) : Instruction, ConditionalInstruction {
+private class ConditionalIncrementInstruction(override val instruction: String) : Instruction, ConditionalInstruction {
     override fun execute(computer: Computer) {
         if (condition.evaluate(computer)) computer.operateOnRegister(register) {it + amount}
     }
 }
 
-interface ConditionalInstruction {
+private interface ConditionalInstruction {
     val instruction: String
     val register: String
         get() = instruction.substringBefore(" ")
@@ -48,7 +48,7 @@ interface ConditionalInstruction {
         get() = Condition(instruction.substringAfter("if "))
 }
 
-class Condition(private val condition: String) {
+private class Condition(private val condition: String) {
     private val register: String
         get() = condition.substringBefore(" ")
     private val operator: String
