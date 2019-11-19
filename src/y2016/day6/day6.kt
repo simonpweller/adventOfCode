@@ -1,9 +1,9 @@
-package day6
+package y2016.day6
 
 import java.io.File
 
 fun main() {
-    val lines = File("src/day6.txt").readLines()
+    val lines = File("src/y2016/day6/day6.txt").readLines()
     println(correctErrors(lines, ::maxCharCount))
     println(correctErrors(lines, ::minCharCount))
 }

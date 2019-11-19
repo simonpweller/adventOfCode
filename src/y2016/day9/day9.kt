@@ -1,9 +1,9 @@
-package day9
+package y2016.day9
 
 import java.io.File
 
 fun main() {
-    val input = File("src/day9.txt").readText()
+    val input = File("src/y2016/day9/day9.txt").readText()
     println(decompress(input))
     println(decompress(input, true))
 }

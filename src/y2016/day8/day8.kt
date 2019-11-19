@@ -1,10 +1,10 @@
-package day8
+package y2016.day8
 
 import java.io.File
 
 fun main() {
     val screen = Screen(50, 6)
-    File("src/day8.txt").forEachLine { line ->
+    File("src/y2016/day8/day8.txt").forEachLine { line ->
         when {
             line.startsWith("rect") -> {
                 val wide = line.substringAfter(" ").substringBefore("x").toInt()

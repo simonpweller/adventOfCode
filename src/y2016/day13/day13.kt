@@ -1,4 +1,4 @@
-package day13
+package y2016.day13
 
 fun main() {
     println(part1(1358))

@@ -1,9 +1,9 @@
-package day3
+package y2016.day3
 
 import java.io.File
 
 fun main() {
-    val lines = File("src/day3.txt")
+    val lines = File("src/y2016/day3/day3.txt")
         .readLines()
         .map { line -> line.trim().split("\\s+".toRegex()).map { it.toInt() } }
 

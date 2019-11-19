@@ -1,11 +1,11 @@
-package day5
+package y2016.day5
 
 import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
 
 fun main() {
-    val input = File("src/day5.txt").readText()
+    val input = File("src/y2016/day5/day5.txt").readText()
     println(getPassword(input, ::passwordModifierPart1))
     println(getPassword(input, ::passwordModifierPart2))
 }

@@ -1,4 +1,4 @@
-package day11
+package y2016.day11
 
 fun main() {
     val firstFloor = Floor(

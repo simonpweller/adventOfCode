@@ -1,9 +1,9 @@
-package day7
+package y2016.day7
 
 import java.io.File
 
 fun main() {
-    val ips = File("src/day7.txt").readLines().map { IP(it) }
+    val ips = File("src/y2016/day7/day7.txt").readLines().map { IP(it) }
     println(ips.filter{it.supportsTSL}.size)
     println(ips.filter{it.supportsSSL}.size)
 }

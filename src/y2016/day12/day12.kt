@@ -1,10 +1,10 @@
-package day12
+package y2016.day12
 
 import java.io.File
 import java.lang.IllegalArgumentException
 
 fun main() {
-    val lines = File("src/day12/day12.txt").readLines()
+    val lines = File("src/y2016/day12/day12.txt").readLines()
     val computerPart1 = Computer()
     computerPart1.execute(lines)
     println(computerPart1.getRegister("a"))
