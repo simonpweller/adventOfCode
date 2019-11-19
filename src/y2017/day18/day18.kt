@@ -3,20 +3,72 @@ package y2017.day18
 import cpu.Computer
 import cpu.Instruction
 import java.io.File
-import kotlin.system.exitProcess
+import java.lang.IllegalStateException
 
 fun main() {
-    val instructions = File("src/y2017/day18/input.txt").readLines().map(::readInstruction)
-    Computer().execute(instructions)
+    InterruptibleComputer().execute(File("src/y2017/day18/input.txt").readLines().map(::readInstructionPart1))
+
+    val part2Instructions = File("src/y2017/day18/input.txt").readLines().map(::readInstructionPart2)
+    val program1 = ConcurrentComputer()
+    val program0 = ConcurrentComputer()
+    program0.partnerProgram = program1
+    program1.partnerProgram = program0
+    program1.setRegister("p", 1)
+    do {
+        program0.execute(part2Instructions)
+        program1.execute(part2Instructions)
+    } while (program0.queue.isNotEmpty() || program1.queue.isNotEmpty())
+    println(program1.numberOfSends)
 }
 
-private fun readInstruction(instruction: String): Instruction = when(instruction.substringBefore(" ")) {
+class InterruptibleComputer(programCounter: Int = 0): Computer(programCounter) {
+    override fun execute(instructions: List<Instruction>): Computer {
+        try {
+            super.execute(instructions)
+        } finally {
+            return this
+        }
+    }
+}
+
+class ConcurrentComputer(programCounter: Int = 0, var partnerProgram: ConcurrentComputer? = null): Computer(programCounter) {
+    var queue = listOf<Long>()
+    var numberOfSends = 0
+
+    override fun execute(instructions: List<Instruction>): Computer {
+        while (instructions.size > programCounter) {
+            if (
+                programCounter < 0 ||
+                programCounter > instructions.lastIndex ||
+                (queue.isEmpty() && instructions[programCounter] is ReceiveInstruction)
+            ) {
+                return this
+            }
+            instructions[programCounter].execute(this)
+            programCounter++
+        }
+        return this
+    }
+}
+
+private fun readInstructionPart1(instruction: String): Instruction = when(instruction.substringBefore(" ")) {
     "snd" -> SoundInstruction(instruction)
     "set" -> SetInstruction(instruction)
     "add" -> AddInstruction(instruction)
     "mul" -> MultiplyInstruction(instruction)
     "mod" -> ModuloInstruction(instruction)
     "rcv" -> RecoveryInstruction(instruction)
+    "jgz" -> JumpIfGreaterThanZeroInstruction(instruction)
+    else -> throw IllegalArgumentException("Unknown instruction type")
+}
+
+private fun readInstructionPart2(instruction: String): Instruction = when(instruction.substringBefore(" ")) {
+    "snd" -> SendInstruction(instruction)
+    "set" -> SetInstruction(instruction)
+    "add" -> AddInstruction(instruction)
+    "mul" -> MultiplyInstruction(instruction)
+    "mod" -> ModuloInstruction(instruction)
+    "rcv" -> ReceiveInstruction(instruction)
     "jgz" -> JumpIfGreaterThanZeroInstruction(instruction)
     else -> throw IllegalArgumentException("Unknown instruction type")
 }
@@ -61,7 +113,7 @@ private class RecoveryInstruction(override val instruction: String) : Instructio
     override fun execute(computer: Computer) {
         if (this.getFirstValue(computer) != 0L) {
             println(mostRecentSound)
-            exitProcess(0)
+            throw Exception("That's enough now")
         }
     }
 }
@@ -69,6 +121,28 @@ private class RecoveryInstruction(override val instruction: String) : Instructio
 private class JumpIfGreaterThanZeroInstruction(override val instruction: String) : Instruction, FirstValueInterface, SecondValueInterface {
     override fun execute(computer: Computer) {
         if (this.getFirstValue(computer) > 0) computer.jump(this.getSecondValue(computer).toInt())
+    }
+}
+
+class SendInstruction(override val instruction: String) : Instruction, FirstValueInterface {
+    override fun execute(computer: Computer) {
+        if (computer is ConcurrentComputer) {
+            computer.numberOfSends++
+            computer.partnerProgram!!.queue = computer.partnerProgram!!.queue.plus(this.getFirstValue(computer))
+        } else {
+            throw IllegalStateException("Executing SendInstruction on a machine that's not a ConcurrentComputer")
+        }
+    }
+}
+
+class ReceiveInstruction(override val instruction: String) : Instruction, RegisterInterface {
+    override fun execute(computer: Computer) {
+        if (computer is ConcurrentComputer) {
+            computer.setRegister(register, computer.queue.first())
+            computer.queue = computer.queue.subList(1, computer.queue.size)
+        } else {
+            throw IllegalStateException("Executing SendInstruction on a machine that's not a ConcurrentComputer")
+        }
     }
 }
 
