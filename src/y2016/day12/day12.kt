@@ -7,14 +7,8 @@ import java.lang.IllegalArgumentException
 
 fun main() {
     val instructions = File("src/y2016/day12/day12.txt").readLines().map(::readInstruction)
-    val computerPart1 = Computer()
-    computerPart1.execute(instructions)
-    println(computerPart1.getRegister("a"))
-
-    val computerPart2 = Computer()
-    computerPart2.setRegister("c", 1)
-    computerPart2.execute(instructions)
-    println(computerPart2.getRegister("a"))
+    println(Computer().execute(instructions).getRegister("a"))
+    println(Computer().setRegister("c", 1).execute(instructions).getRegister("a"))
 }
 
 private fun readInstruction(instruction: String): Instruction = when(instruction.substringBefore(" ")) {
