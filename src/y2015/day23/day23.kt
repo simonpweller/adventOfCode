@@ -23,19 +23,19 @@ private fun readInstruction(instruction: String): Instruction = when(instruction
 
 private class HalfInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
-        computer.setRegister(register, computer.getRegister(register) / 2)
+        computer.operateOnRegister(register) {it / 2}
     }
 }
 
 private class TripleInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
-        computer.setRegister(register, computer.getRegister(register) * 3)
+        computer.operateOnRegister(register) {it * 3}
     }
 }
 
 private class IncrementInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
-        computer.setRegister(register, computer.getRegister(register) + 1)
+        computer.operateOnRegister(register) {it + 1}
     }
 }
 

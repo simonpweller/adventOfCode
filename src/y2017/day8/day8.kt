@@ -28,13 +28,13 @@ fun readInstruction(instruction: String): Instruction = when(instruction.substri
 
 class ConditionalDecrementInstruction(override val instruction: String) : Instruction, ConditionalInstruction {
     override fun execute(computer: Computer) {
-        if (condition.evaluate(computer)) computer.setRegister(register, computer.getRegister(register) - amount)
+        if (condition.evaluate(computer)) computer.operateOnRegister(register) {it - amount}
     }
 }
 
 class ConditionalIncrementInstruction(override val instruction: String) : Instruction, ConditionalInstruction {
     override fun execute(computer: Computer) {
-        if (condition.evaluate(computer)) computer.setRegister(register, computer.getRegister(register) + amount)
+        if (condition.evaluate(computer)) computer.operateOnRegister(register) {it + amount}
     }
 }
 

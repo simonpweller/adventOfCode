@@ -44,13 +44,13 @@ private class CopyInstruction(override val instruction: String) : Instruction, R
 
 private class IncrementInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
-        computer.setRegister(register, computer.getRegister(register) + 1)
+        computer.operateOnRegister(register) {it + 1}
     }
 }
 
 private class DecrementInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
-        computer.setRegister(register, computer.getRegister(register) - 1)
+        computer.operateOnRegister(register) {it - 1}
     }
 }
 
