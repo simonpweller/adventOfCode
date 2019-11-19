@@ -27,9 +27,9 @@ private interface RegisterInstruction {
 
 private interface InputInstruction {
     val instruction: String
-    fun getInput(computer: Computer): Int {
+    fun getInput(computer: Computer): Long {
         val input = instruction.substringAfter(" ").substringBefore(" ")
-        return if (input.toIntOrNull() == null) { computer.getRegister(input) } else { input.toInt() }
+        return if (input.toLongOrNull() == null) { computer.getRegister(input) } else { input.toLong() }
     }
 }
 
@@ -59,6 +59,6 @@ private class JumpIfNotZeroInstruction(override val instruction: String): Instru
         get() = instruction.substringAfterLast(" ").toInt()
 
     override fun execute(computer: Computer) {
-        if (getInput(computer) != 0) computer.jump(offset)
+        if (getInput(computer) != 0L) computer.jump(offset)
     }
 }

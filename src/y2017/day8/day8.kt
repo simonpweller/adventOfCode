@@ -53,8 +53,8 @@ private class Condition(private val condition: String) {
         get() = condition.substringBefore(" ")
     private val operator: String
         get() = condition.substringAfter(" ").substringBefore(" ")
-    private val value: Int
-        get() = condition.substringAfterLast(" ").toInt()
+    private val value: Long
+        get() = condition.substringAfterLast(" ").toLong()
     fun evaluate(computer: Computer): Boolean {
         val registerValue = computer.getRegister(register)
         return when(operator) {

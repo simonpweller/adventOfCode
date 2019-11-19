@@ -56,12 +56,12 @@ private class JumpIfEvenInstruction(override val instruction: String): Instructi
     val offset: Int
         get() = instruction.substringAfter(", ").toInt()
 
-    private fun Int.isEven(): Boolean = this % 2 == 0
+    private fun Long.isEven(): Boolean = this % 2 == 0L
 }
 
 private class JumpIfOneInstruction(override val instruction: String): Instruction, RegisterInstruction {
     override fun execute(computer: Computer) {
-        if (computer.getRegister(register) == 1) computer.jump(offset)
+        if (computer.getRegister(register) == 1L) computer.jump(offset)
     }
 
     val offset: Int
