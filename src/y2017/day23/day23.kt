@@ -3,10 +3,12 @@ package y2017.day23
 import cpu.Computer
 import cpu.Instruction
 import java.io.File
+import isPrime
 
 fun main() {
     Computer().execute(File("src/y2017/day23/input.txt").readLines().map(::readInstruction))
     println(multOps)
+    println((109300 .. 126300 step 17).count{!isPrime(it)}) // based on manually translating the assembly code
 }
 
 var multOps = 0
