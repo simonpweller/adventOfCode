@@ -1,6 +1,6 @@
 package day21
 
-import utils.combinations
+import combinations
 import java.io.File
 import java.lang.Integer.max
 

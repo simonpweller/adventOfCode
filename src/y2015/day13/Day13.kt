@@ -1,6 +1,6 @@
 package day13
 
-import utils.permutations
+import permutations
 import java.io.File
 
 fun main() {

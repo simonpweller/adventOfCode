@@ -1,6 +1,6 @@
 package day15
 
-import utils.weakCompositions
+import weakCompositions
 import java.io.File
 
 

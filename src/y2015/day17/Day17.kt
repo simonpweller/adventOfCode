@@ -1,6 +1,6 @@
 package day17
 
-import utils.subLists
+import subLists
 import java.io.File
 
 fun main() {
