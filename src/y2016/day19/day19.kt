@@ -5,18 +5,31 @@ import java.lang.IllegalArgumentException
 
 fun main() {
     val numberOfElves = File("src/y2016/day19/input.txt").readText().toInt()
-    println(Circle(numberOfElves).getWinningElf())
+    println(Circle(numberOfElves).getWinningElfPart1())
+    println(Circle(numberOfElves).getWinningElfPart2())
 }
 
-class Circle(numberOfElves: Int) {
+class Circle(private val numberOfElves: Int) {
     private val presentCounts = CircularLinkedList((1 .. numberOfElves).toList())
 
-    fun getWinningElf(): Int {
+    fun getWinningElfPart1(): Int {
         var elf = presentCounts.start
         do {
             elf.removeNext()
             elf = elf.next
         } while (elf.next != elf)
+        return elf.value
+    }
+
+    fun getWinningElfPart2(): Int {
+        var elf = presentCounts.start
+        repeat(numberOfElves / 2 - 1) {elf = elf.next} // jump to first elf to remove
+        var skipAnElf = false
+        while (elf != elf.next) {
+            if (skipAnElf) elf = elf.next
+            elf.link = elf.next.next
+            skipAnElf = !skipAnElf
+        }
         return elf.value
     }
 }
@@ -31,11 +44,7 @@ class CircularLinkedList<Int>(list: List<Int>) {
             get() = link ?: start
 
         fun removeNext() {
-            val newLink = next.next
-            if (next == start) {
-                start = newLink
-            }
-            link = newLink
+            link = next.next
         }
     }
 }
