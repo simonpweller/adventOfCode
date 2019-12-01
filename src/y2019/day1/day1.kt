@@ -4,11 +4,9 @@ import java.io.File
 
 fun main() {
     val moduleWeights = File("src/y2019/day1/input.txt").readLines().map { it.toInt() }
-    println(moduleWeights.sumBy { naiveFuelRequired(it) })
-    println(moduleWeights.sumBy { fuelRequired(it) })
+    println(moduleWeights.sumBy(::fuel))
+    println(moduleWeights.sumBy(::totalFuel))
 }
 
-private fun fuelRequired(mass: Int): Int =
-    generateSequence(naiveFuelRequired(mass)) { naiveFuelRequired(it)}.takeWhile { it > 0 }.sum()
-
-private fun naiveFuelRequired(mass: Int) = mass / 3 - 2
+private fun fuel(mass: Int) = mass / 3 - 2
+private fun totalFuel(mass: Int): Int = generateSequence(fuel(mass), ::fuel).takeWhile { it > 0 }.sum()
