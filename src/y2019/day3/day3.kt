@@ -1,12 +1,13 @@
 package y2019.day3
 
 import java.io.File
+import kotlin.math.abs
 
 fun main() {
     val lines = File("src/y2019/day3/input.txt").readLines()
     val firstWirePoints = visitedPoints(lines[0])
     val secondWirePoints = visitedPoints(lines[1])
-    println(firstWirePoints.intersect(secondWirePoints))
+    println(firstWirePoints.intersect(secondWirePoints).map { abs(it.first) + abs(it.second) }.min())
 }
 
 private fun visitedPoints(wire: String): Set<Pair<Int, Int>> {
@@ -15,26 +16,10 @@ private fun visitedPoints(wire: String): Set<Pair<Int, Int>> {
     return wire.split(",").fold(setOf()) { acc, curr ->
         val steps = curr.drop(1).toInt()
         when (curr[0]) {
-            'R' -> {
-                val newAcc = acc.plus((1..steps).map { Pair(x + it, y) })
-                x += steps
-                newAcc
-            }
-            'D' -> {
-                val newAcc = acc.plus((1..steps).map { Pair(x, y - it) })
-                y -= steps
-                newAcc
-            }
-            'L' -> {
-                val newAcc = acc.plus((1..steps).map { Pair(x - it, y) })
-                x -= steps
-                newAcc
-            }
-            else -> {
-                val newAcc = acc.plus((1..steps).map { Pair(x, y + it) })
-                y += steps
-                newAcc
-            }
+            'R' -> acc.plus((1..steps).map { Pair(++x, y) })
+            'D' -> acc.plus((1..steps).map { Pair(x, --y) })
+            'L' -> acc.plus((1..steps).map { Pair(--x, y) })
+            else -> acc.plus((1..steps).map { Pair(x, ++y) })
         }
     }
 }
