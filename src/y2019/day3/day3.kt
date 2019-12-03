@@ -1,19 +1,15 @@
 package y2019.day3
 
-import java.io.File
+import resourceLines
 import kotlin.math.abs
 
 fun main() {
-    val lines = File("src/y2019/day3/input.txt").readLines()
-    val firstWirePositions = wirePositions(lines[0])
-    val secondWirePositions = wirePositions(lines[1])
-    val visitedPositionsFirstWire = firstWirePositions.map { Pair(it.x, it.y) }.toSet()
-    val visitedPositionsSecondWire = secondWirePositions.map { Pair(it.x, it.y) }.toSet()
-    val intersections = visitedPositionsFirstWire.intersect(visitedPositionsSecondWire)
-    println(intersections.map { abs(it.first) + abs(it.second) }.min())
+    val (wire1, wire2) = resourceLines(2019, 3).map(::wirePositions)
+    val intersections = wire1.map { it.toPoint() }.intersect(wire2.map { it.toPoint() })
+    println(intersections.map { it.manhattan() }.min())
     println(intersections.map { intersection ->
-        firstWirePositions.find { it.x == intersection.first && it.y == intersection.second }!!.steps +
-        secondWirePositions.find { it.x == intersection.first && it.y == intersection.second }!!.steps
+        wire1.find { it.x == intersection.x && it.y == intersection.y }!!.steps +
+        wire2.find { it.x == intersection.x && it.y == intersection.y }!!.steps
     }.min())
 }
 
@@ -32,4 +28,10 @@ private fun wirePositions(wire: String): Set<WirePosition> {
     }
 }
 
-class WirePosition(val x: Int, val y: Int, val steps: Int)
+class WirePosition(val x: Int, val y: Int, val steps: Int) {
+    fun toPoint() = Point(x, y)
+}
+
+data class Point(val x: Int, val y: Int) {
+    fun manhattan() = abs(x) + abs(y)
+}
