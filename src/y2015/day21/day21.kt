@@ -1,11 +1,11 @@
-package day21
+package y2015.day21
 
 import combinations
-import java.io.File
+import resourceLines
 import java.lang.Integer.max
 
 fun main() {
-    val lines = File("src/y2015/day21/input.txt").readLines()
+    val lines = resourceLines(2015, 21)
     val (bossHitPoints, bossDamage, bossArmor) = lines.map { it.substringAfter(": ").toInt() }
 
     val equipmentCombos = getEquipmentCombos()

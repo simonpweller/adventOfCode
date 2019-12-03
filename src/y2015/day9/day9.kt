@@ -1,10 +1,10 @@
-package day9
+package y2015.day9
 
 import permutations
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day9/input.txt").readLines()
+    val lines = resourceLines(2015, 9)
     val distances = parseDistances(lines)
     val routes = permutations(distances.keys.toSet())
     val routeDistances = routes.map { route ->

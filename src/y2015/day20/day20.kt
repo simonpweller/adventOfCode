@@ -1,4 +1,4 @@
-package day20
+package y2015.day20
 
 import kotlin.math.sqrt
 

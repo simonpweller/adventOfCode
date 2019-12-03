@@ -1,9 +1,9 @@
 package y2016.day10
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val instructions = File("src/y2016/day10/day10.txt").readLines()
+    val instructions = resourceLines(2016, 10)
     val bots = mutableMapOf<Int, Bot>()
     val outputs = mutableMapOf<Int, Int>()
     instructions.filter { it.startsWith("value") }.forEach {

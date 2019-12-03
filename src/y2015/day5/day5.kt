@@ -1,11 +1,11 @@
-package day5
+package y2015.day5
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day5/input.txt").readLines()
-    println(count(lines) { isNice1(it)})
-    println(count(lines) { isNice2(it)})
+    val lines = resourceLines(2015, 5)
+    println(count(lines) { isNice1(it) })
+    println(count(lines) { isNice2(it) })
 }
 
 fun count(lines: List<String>, niceties: (String) -> Boolean): Counts {

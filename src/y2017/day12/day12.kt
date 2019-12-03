@@ -1,9 +1,9 @@
 package y2017.day12
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val pipes = File("src/y2017/day12/input.txt").readLines().fold(mapOf<Int, List<Int>>()) { map, line ->
+    val pipes = resourceLines(2017, 12).fold(mapOf<Int, List<Int>>()) { map, line ->
         map.plus(Pair(
             line.substringBefore(" ").toInt(),
             line.substringAfter(" <-> ").split(", ").map { it.toInt() }

@@ -1,12 +1,11 @@
 package y2017.day6
 
 import MutableInfiniteList
-import java.io.File
+import resourceText
 
 fun main() {
-    val bank = MutableInfiniteList(
-        File("src/y2017/day6/input.txt").readText().split("\\s+".toRegex()).map { num -> num.toInt()}.toMutableList()
-    )
+    val bank = MutableInfiniteList(resourceText(2017, 6).split("\\s+".toRegex())
+        .map { num -> num.toInt()}.toMutableList())
     val seenBanks = mutableMapOf<List<Int>, Int>()
     var redistributions = 0
     while (!seenBanks.containsKey(bank.toList())) {

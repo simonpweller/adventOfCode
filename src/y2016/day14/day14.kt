@@ -1,11 +1,11 @@
 package y2016.day14
 
-import java.io.File
+import resourceText
 import java.math.BigInteger
 import java.security.MessageDigest
 
 fun main() {
-    val input = File("src/y2016/day14/input.txt").readText()
+    val input = resourceText(2016, 14)
     println(generateKeys(input).take(64).last())
     println(generateKeys(input, true).take(64).last())
 }

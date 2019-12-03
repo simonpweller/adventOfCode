@@ -1,11 +1,11 @@
-package day4
+package y2015.day4
 
-import java.io.File
-import java.security.MessageDigest
+import resourceText
 import java.math.BigInteger
+import java.security.MessageDigest
 
 fun main() {
-    val input = File("src/y2015/day4/input.txt").readText()
+    val input = resourceText(2015, 4)
     println(solve(input, "00000"))
     println(solve(input, "000000"))
 }

@@ -1,10 +1,10 @@
 package y2016.day18
 
-import java.io.File
+import resourceText
 
 
 fun main() {
-    val firstRow = Floor(File("src/y2016/day18/input.txt").readText().map { Tile(it == '^') })
+    val firstRow = Floor(resourceText(2016, 18).map { Tile(it == '^') })
     println(Dungeon(firstRow, 40).safeTiles)
     println(Dungeon(firstRow, 400000).safeTiles)
 }

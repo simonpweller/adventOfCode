@@ -1,9 +1,9 @@
 package y2017.day1
 
-import java.io.File
+import resourceText
 
 fun main() {
-    val input = File("src/y2017/day1/input.txt").readText()
+    val input = resourceText(2017, 1)
     println(input
         .filterIndexed { index, c -> c == input[(index + 1) % input.length]}
         .sumBy { it.toString().toInt() }

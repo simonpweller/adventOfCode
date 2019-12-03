@@ -1,12 +1,11 @@
 package y2016.day12
 
-import cpu.*
-
-import java.io.File
-import java.lang.IllegalArgumentException
+import cpu.Computer
+import cpu.Instruction
+import resourceLines
 
 fun main() {
-    val instructions = File("src/y2016/day12/day12.txt").readLines().map(::readInstruction)
+    val instructions = resourceLines(2016, 12).map(::readInstruction)
     println(Computer().execute(instructions).getRegister("a"))
     println(Computer().setRegister("c", 1).execute(instructions).getRegister("a"))
 }

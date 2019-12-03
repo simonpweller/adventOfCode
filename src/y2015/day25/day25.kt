@@ -1,9 +1,9 @@
-package day25
+package y2015.day25
 
-import java.io.File
+import resourceText
 
 fun main() {
-    val input = File("src/y2015/day25/input.txt").readText()
+    val input = resourceText(2015, 25)
     val targetRow = input.substringAfter("row ").substringBefore(",").toInt()
     val targetCol = input.substringAfter("column ").substringBefore(".").toInt()
     println(codeAt(targetRow, targetCol, 20151125))

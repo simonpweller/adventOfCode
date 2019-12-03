@@ -1,9 +1,9 @@
-package day3
+package y2015.day3
 
-import java.io.File
+import resourceText
 
 fun main() {
-    val input = File("src/y2015/day3/input.txt").readText()
+    val input = resourceText(2015, 3)
     println(part1(input))
     println(part2(input))
 }

@@ -1,10 +1,10 @@
 package y2017.day4
 
 import charCounts
-import java.io.File
+import resourceLines
 
 fun main() {
-    val passphrases = File("src/y2017/day4/input.txt").readLines().map { it.split(" ") }
+    val passphrases = resourceLines(2017, 4).map { it.split(" ") }
     println(passphrases.filter { it.size == it.toSet().size }.size)
     println(passphrases.map { it.map(::charCounts) }.filter { it.size == it.toSet().size }.size)
 }

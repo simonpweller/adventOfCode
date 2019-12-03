@@ -1,9 +1,9 @@
 package y2016.day2
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val directions = File("src/y2016/day2/day2.txt").readLines().map { line -> line.map { Direction.valueOf(it.toString()) } }
+    val directions = resourceLines(2016, 2).map { line -> line.map { Direction.valueOf(it.toString()) } }
     println(RegularKeypad('5').getCode(directions))
     println(BathroomKeypad('5').getCode(directions))
 }

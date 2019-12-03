@@ -1,9 +1,9 @@
 package y2016.day6
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2016/day6/day6.txt").readLines()
+    val lines = resourceLines(2016, 6)
     println(correctErrors(lines, ::maxCharCount))
     println(correctErrors(lines, ::minCharCount))
 }

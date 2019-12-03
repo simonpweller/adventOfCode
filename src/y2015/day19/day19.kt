@@ -1,9 +1,9 @@
-package day19
+package y2015.day19
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day19/input.txt").readLines()
+    val lines = resourceLines(2015, 19)
     val replacements = mutableMapOf<String, List<String>>()
     val reverseReplacements = mutableMapOf<String, String>()
     lines.filter { it.contains("=>") }.forEach {

@@ -1,11 +1,11 @@
-package day7
+package y2015.day7
 
-import java.io.File
+import resourceLines
 
 private const val MAX_SIGNAL = 65535
 
 fun main() {
-    val lines = File("src/y2015/day7/input.txt").readLines()
+    val lines = resourceLines(2015, 7)
     val wireAResult = Circuit(lines).emulate().getWire("a")
     println(wireAResult)
     println(Circuit(lines).setWire("b", wireAResult!!).emulate().getWire("a"))
@@ -63,12 +63,12 @@ class Instruction(instructionString: String) {
         val (input, output) = instructionString.split(" -> ")
         this.output = output
         val inputs = input.split(" ")
-        when {
-            inputs.size == 1 -> {
+        when (inputs.size) {
+            1 -> {
                 input1 = inputs[0]
                 operator = Operator.NUMERIC
             }
-            inputs.size == 2 -> {
+            2 -> {
                 operator = Operator.NOT
                 input1 = inputs[1]
             }

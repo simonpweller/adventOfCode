@@ -1,11 +1,10 @@
 package y2017.day2
 
+import resourceLines
 import subListsOfSize
-import java.io.File
 
 fun main() {
-    val rows = File("src/y2017/day2/input.txt").readLines()
-        .map { it.split("\\s+".toRegex()).map {num -> num.toInt()} }
+    val rows = resourceLines(2017, 2).map { it.split("\\s+".toRegex()).map {num -> num.toInt()} }
     println(rows.sumBy { it.max()!! - it.min()!! })
     println(rows
         .map { subListsOfSize(it, 2)}

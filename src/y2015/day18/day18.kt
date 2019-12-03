@@ -1,9 +1,9 @@
-package day18
+package y2015.day18
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day18/input.txt").readLines()
+    val lines = resourceLines(2015, 18)
 
     val grid = Grid(100, 100)
     setUpGrid(grid, lines)

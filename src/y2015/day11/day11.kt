@@ -1,10 +1,9 @@
-package day11
+package y2015.day11
 
-import java.io.File
-import java.lang.IllegalArgumentException
+import resourceText
 
 fun main() {
-    val input = File("src/y2015/day11/input.txt").readText()
+    val input = resourceText(2015, 11)
     println(nextValid(input))
     println(nextValid(nextValid(input)))
 }

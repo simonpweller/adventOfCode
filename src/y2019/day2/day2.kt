@@ -1,11 +1,11 @@
 package y2019.day2
 
-import java.io.File
+import resourceText
 import java.lang.IllegalArgumentException
 import java.lang.RuntimeException
 
 fun main() {
-    val program = File("src/y2019/day2/input.txt").readText().split(",").map { it.toInt() }.toIntArray()
+    val program = resourceText(2019, 2).split(",").map { it.toInt() }.toIntArray()
     println(IntComputer(program, 12, 2).run())
     println(part2(program))
 }

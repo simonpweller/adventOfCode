@@ -1,9 +1,9 @@
 package y2017.day7
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2017/day7/input.txt").readLines()
+    val lines = resourceLines(2017, 7)
     println(part1(lines))
     println(part2(lines))
 }

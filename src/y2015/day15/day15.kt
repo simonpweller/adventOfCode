@@ -1,11 +1,11 @@
-package day15
+package y2015.day15
 
+import resourceLines
 import weakCompositions
-import java.io.File
 
 
 fun main() {
-    val lines = File("src/y2015/day15/input.txt").readLines()
+    val lines = resourceLines(2015, 15)
     val ingredients = parseIngredients(lines)
 
     val recipes = weakCompositions(100, ingredients.size)

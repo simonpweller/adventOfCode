@@ -1,9 +1,9 @@
 package y2016.day7
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val ips = File("src/y2016/day7/day7.txt").readLines().map { IP(it) }
+    val ips = resourceLines(2016, 7).map { IP(it) }
     println(ips.filter{it.supportsTSL}.size)
     println(ips.filter{it.supportsSSL}.size)
 }

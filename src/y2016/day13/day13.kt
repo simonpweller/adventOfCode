@@ -1,8 +1,10 @@
 package y2016.day13
 
+import resourceText
+
 fun main() {
-    println(part1(1358))
-    println(part2(1358))
+    println(part1(resourceText(2016, 13).toInt()))
+    println(part2(resourceText(2016, 13).toInt()))
 }
 
 fun part1(favoriteNumber: Int): Int? {

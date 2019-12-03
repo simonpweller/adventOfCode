@@ -1,12 +1,13 @@
-package day22
+package y2015.day22
 
-import java.io.File
-import java.lang.Integer.*
+import resourceLines
+import java.lang.Integer.MAX_VALUE
+import java.lang.Integer.max
 
 var currentMin = MAX_VALUE
 
 fun main() {
-    val lines = File("src/y2015/day22/input.txt").readLines()
+    val lines = resourceLines(2015, 22)
     val (hitPoints, damage) = lines.map{it.substringAfter(": ").toInt()}
     println(BattleState(bossDamage = damage, bossHitPoints = hitPoints).getMinManaSpentToWin())
     currentMin = MAX_VALUE

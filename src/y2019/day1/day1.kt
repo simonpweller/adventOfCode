@@ -1,9 +1,9 @@
 package y2019.day1
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val moduleWeights = File("src/y2019/day1/input.txt").readLines().map { it.toInt() }
+    val moduleWeights = resourceLines(2019, 1).map { it.toInt() }
     println(moduleWeights.sumBy(::fuel))
     println(moduleWeights.sumBy(::totalFuel))
 }

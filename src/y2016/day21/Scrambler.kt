@@ -1,10 +1,9 @@
 package y2016.day21
 
-import java.io.File
-import java.lang.IllegalArgumentException
+import resourceLines
 
 fun main() {
-    val operations = File("src/y2016/day21/input.txt").readLines().map {
+    val operations = resourceLines(2016, 21).map {
         when(it.substringBefore(" ")) {
             "swap" -> SwapOperation(it)
             "rotate" -> RotateOperation(it)
@@ -15,7 +14,9 @@ fun main() {
     }
 
     val scrambledPassword = Scrambler(operations).scramble("abcdefgh")
+    val unscrambledPassword = Scrambler(operations.reversed()).scramble("fbgdceah")
     println(scrambledPassword)
+    println(unscrambledPassword)
 }
 
 class Scrambler(private val operations: List<Operation>) {

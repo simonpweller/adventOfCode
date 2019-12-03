@@ -1,9 +1,9 @@
 package y2016.day15
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val discs = File("src/y2016/day15/input.txt").readLines().map { Disc(
+    val discs = resourceLines(2016, 15).map { Disc(
         it.substringAfter("#").substringBefore(" ").toInt(),
         it.substringAfter("has ").substringBefore(" positions").toInt(),
         it.substringAfter("position ").substringBefore(".").toInt()

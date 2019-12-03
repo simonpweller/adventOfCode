@@ -1,9 +1,9 @@
 package y2017.day5
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val offsets = File("src/y2017/day5/input.txt").readLines().map { it.toInt() }.toMutableList()
+    val offsets = resourceLines(2017, 5).map { it.toInt() }.toMutableList()
     println(countSteps(offsets))
     println(countSteps(offsets, isPart2 = true))
 }

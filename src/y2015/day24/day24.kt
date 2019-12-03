@@ -1,9 +1,9 @@
-package day24
+package y2015.day24
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val packages = File("src/y2015/day24/input.txt").readLines().map { it.toInt() }.reversed()
+    val packages = resourceLines(2015, 24).map { it.toInt() }.reversed()
     println(part1(packages))
     println(part2(packages))
 }

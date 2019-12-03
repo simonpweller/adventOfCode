@@ -1,10 +1,10 @@
-package day16
+package y2015.day16
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day16/input.txt").readLines()
-    val sues = lines.map {parseSue(it)}
+    val lines = resourceLines(2015, 16)
+    val sues = lines.map { parseSue(it) }
     val matchingSuePart1 = sues
         .filter { it.traitEquals("children", 3) }
         .filter { it.traitEquals("cats", 7) }

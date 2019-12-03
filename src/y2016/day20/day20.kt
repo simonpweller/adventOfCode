@@ -1,12 +1,12 @@
 package y2016.day20
 
-import java.io.File
+import resourceLines
 import java.lang.Long.max
 
 fun main() {
     val upperLimitExclusive = 4294967296L
 
-    val blockedRanges = File("src/y2016/day20/input.txt").readLines()
+    val blockedRanges = resourceLines(2016, 20)
         .map { range -> range.split("-").map { it.toLong() } }
         .map { LongRange(it.first(), it.last()) }
         .sortedBy { it.first }

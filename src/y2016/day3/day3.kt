@@ -1,10 +1,9 @@
 package y2016.day3
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2016/day3/day3.txt")
-        .readLines()
+    val lines = resourceLines(2016, 3)
         .map { line -> line.trim().split("\\s+".toRegex()).map { it.toInt() } }
 
     val triangles = lines.map { Triple(it[0], it[1], it[2]) }

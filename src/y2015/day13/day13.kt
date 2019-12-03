@@ -1,10 +1,10 @@
-package day13
+package y2015.day13
 
 import permutations
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day13/input.txt").readLines()
+    val lines = resourceLines(2015, 13)
     val happinessImpact = parseHappinessImpact(lines)
     val setOfPeople = happinessImpact.keys.toSet()
     println(getHappinessBenefit(permutations(setOfPeople), happinessImpact))

@@ -1,10 +1,10 @@
-package day17
+package y2015.day17
 
+import resourceLines
 import subLists
-import java.io.File
 
 fun main() {
-    val lines: List<String> = File("src/y2015/day17/input.txt").readLines()
+    val lines: List<String> = resourceLines(2015, 17)
     println(combinationsOfSize150(lines).size)
     println(combinationsOfSize150WithMinimumNumberOfContainers(lines).size)
 }

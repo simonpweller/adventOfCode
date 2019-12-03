@@ -1,11 +1,10 @@
 package y2016.day1
 
-import java.io.File
-import java.lang.IllegalArgumentException
+import resourceText
 import kotlin.math.abs
 
 fun main() {
-    val instructions = File("src/y2016/day1/day1.txt").readText().split(", ").map{ Instruction(it) }
+    val instructions = resourceText(2016, 1).split(", ").map{ Instruction(it) }
     println(part1(instructions))
     println(part2(instructions))
 }

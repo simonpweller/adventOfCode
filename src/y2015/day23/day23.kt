@@ -2,10 +2,10 @@ package y2015.day23
 
 import cpu.Computer
 import cpu.Instruction
-import java.io.File
+import resourceLines
 
 fun main() {
-    val instructions = File("src/y2015/day23/input.txt").readLines().map(::readInstruction)
+    val instructions = resourceLines(2015, 23).map(::readInstruction)
     println(Computer().execute(instructions).getRegister("b"))
     println(Computer().setRegister("a", 1).execute(instructions).getRegister("b"))
 }

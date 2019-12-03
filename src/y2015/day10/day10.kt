@@ -1,9 +1,9 @@
-package day10
+package y2015.day10
 
-import java.io.File
+import resourceText
 
 fun main() {
-    val input = File("src/y2015/day10/input.txt").readText()
+    val input = resourceText(2015, 10)
     println(lookAndSayNTimes(input, 40).length)
     println(lookAndSayNTimes(input, 50).length)
 }

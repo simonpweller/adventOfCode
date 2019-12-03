@@ -2,13 +2,12 @@ package y2017.day18
 
 import cpu.Computer
 import cpu.Instruction
-import java.io.File
-import java.lang.IllegalStateException
+import resourceLines
 
 fun main() {
-    InterruptibleComputer().execute(File("src/y2017/day18/input.txt").readLines().map(::readInstructionPart1))
+    InterruptibleComputer().execute(resourceLines(2017, 18).map(::readInstructionPart1))
 
-    val part2Instructions = File("src/y2017/day18/input.txt").readLines().map(::readInstructionPart2)
+    val part2Instructions = resourceLines(2017, 18).map(::readInstructionPart2)
     val program1 = ConcurrentComputer()
     val program0 = ConcurrentComputer()
     program0.partnerProgram = program1

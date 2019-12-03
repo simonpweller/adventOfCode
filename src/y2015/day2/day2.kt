@@ -1,19 +1,19 @@
-package day2
+package y2015.day2
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day2/input.txt").readLines()
+    val lines = resourceLines(2015, 2)
     println(part1(lines))
     println(part2(lines))
 }
 
 fun part1(lines: List<String>): Int {
-    return lines.map{toPresent(it).wrappingPaper()}.sum()
+    return lines.map{ toPresent(it).wrappingPaper()}.sum()
 }
 
 fun part2(lines: List<String>): Int {
-    return lines.map{toPresent(it).ribbon()}.sum()
+    return lines.map{ toPresent(it).ribbon()}.sum()
 }
 
 fun toPresent(line: String): Present {

@@ -1,9 +1,9 @@
-package day14
+package y2015.day14
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day14/input.txt").readLines()
+    val lines = resourceLines(2015, 14)
     val reindeer = parseReindeer(lines)
     repeat(2503) {
         reindeer.forEach{it.act()}

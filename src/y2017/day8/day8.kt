@@ -2,10 +2,10 @@ package y2017.day8
 
 import cpu.Computer
 import cpu.Instruction
-import java.io.File
+import resourceLines
 
 fun main() {
-    val instructions = File("src/y2017/day8/input.txt").readLines().map(::readInstruction)
+    val instructions = resourceLines(2017, 8).map(::readInstruction)
     val computer1 = Computer().execute(instructions)
     println(computer1.registers.values.max())
 

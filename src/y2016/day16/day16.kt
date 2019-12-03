@@ -1,9 +1,9 @@
 package y2016.day16
 
-import java.io.File
+import resourceText
 
 fun main() {
-    val input = File("src/y2016/day16/input.txt").readText()
+    val input = resourceText(2016, 16)
     println(checksum(fakeData( 272, input)))
     println(checksum(fakeData( 35651584, input)))
 }

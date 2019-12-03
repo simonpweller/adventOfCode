@@ -1,11 +1,10 @@
 package y2017.day9
 
-import java.io.File
+import resourceText
 
 fun main() {
-    val input = File("src/y2017/day9/input.txt").readText()
     val garbageRegex = "<[^>]*>".toRegex()
-    val escapedInput = input.replace("!.".toRegex(), "")
+    val escapedInput = resourceText(2017, 9).replace("!.".toRegex(), "")
     println(groupCount(escapedInput.replace(garbageRegex, "").replace(",", "")))
     println(garbageRegex.findAll(escapedInput).map { it.value.length - 2 }.sum())
 }

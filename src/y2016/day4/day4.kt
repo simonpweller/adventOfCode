@@ -1,9 +1,9 @@
 package y2016.day4
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val validRooms = File("src/y2016/day4/day4.txt").readLines().map(::Room).filter { it.isValid() }
+    val validRooms = resourceLines(2016, 4).map(::Room).filter { it.isValid() }
     println(validRooms.sumBy{it.sectorId})
     println(validRooms.find { it.realName.contains("north") }?.sectorId)
 }

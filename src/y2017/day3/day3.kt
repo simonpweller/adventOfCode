@@ -1,13 +1,13 @@
 package y2017.day3
 
-import java.io.File
+import resourceText
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.sqrt
 import kotlin.system.exitProcess
 
 fun main() {
-    val input = File("src/y2017/day3/input.txt").readText().toInt()
+    val input = resourceText(2017, 3).toInt()
     println(part1(input))
     part2(input)
 }

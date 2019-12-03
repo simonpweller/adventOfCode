@@ -1,9 +1,9 @@
-package day8
+package y2015.day8
 
-import java.io.File
+import resourceLines
 
 fun main() {
-    val lines = File("src/y2015/day8/input.txt").readLines()
+    val lines = resourceLines(2015, 8)
     println(totalCharacters(lines) - charactersInMemory(lines))
     println(encodedCharacters(lines) - totalCharacters(lines))
 }
@@ -13,11 +13,11 @@ fun totalCharacters(lines: List<String>): Int {
 }
 
 fun charactersInMemory(lines: List<String>): Int {
-    return lines.map{strip(it).length}.sum()
+    return lines.map{ strip(it).length}.sum()
 }
 
 fun encodedCharacters(lines: List<String>): Int {
-    return lines.map{encode(it).length}.sum()
+    return lines.map{ encode(it).length}.sum()
 }
 
 fun encode(line: String): String {

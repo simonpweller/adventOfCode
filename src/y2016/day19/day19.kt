@@ -1,10 +1,9 @@
 package y2016.day19
 
-import java.io.File
-import java.lang.IllegalArgumentException
+import resourceText
 
 fun main() {
-    val numberOfElves = File("src/y2016/day19/input.txt").readText().toInt()
+    val numberOfElves = resourceText(2016, 19).toInt()
     println(Circle(numberOfElves).getWinningElfPart1())
     println(Circle(numberOfElves).getWinningElfPart2())
 }
