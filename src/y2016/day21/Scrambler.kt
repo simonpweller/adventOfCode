@@ -13,22 +13,22 @@ fun main() {
         }
     }
 
-    val scrambledPassword = Scrambler(operations).scramble("abcdefgh")
-    val unscrambledPassword = Scrambler(operations.reversed()).scramble("fbgdceah")
-    println(scrambledPassword)
-    println(unscrambledPassword)
+    println(Scrambler(operations).scramble("abcdefgh"))
+    println(Scrambler(operations).unscramble("fbgdceah"))
 }
 
 class Scrambler(private val operations: List<Operation>) {
     fun scramble(password: String): String = operations.fold(password) { pw, operation -> operation.apply(pw) }
+    fun unscramble(scrambledPassword: String): String =
+        operations.reversed().fold(scrambledPassword) { scrambledPw, operation -> operation.reverse(scrambledPw) }
 }
-
 interface Operation {
     val operation: String
     val words
         get() = operation.split(" ")
 
     fun apply(input: String): String
+    fun reverse(input: String): String
 }
 
 class SwapOperation(override val operation: String): Operation {
@@ -50,6 +50,8 @@ class SwapOperation(override val operation: String): Operation {
         }
         return input.replaceRange(xPos, xPos + 1, y).replaceRange(yPos, yPos + 1, x)
     }
+
+    override fun reverse(input: String): String = apply(input)
 }
 
 class ReverseOperation(override val operation: String) : Operation {
@@ -59,6 +61,8 @@ class ReverseOperation(override val operation: String) : Operation {
 
         return input.replaceRange(startIndex, endIndex, input.subSequence(startIndex, endIndex).reversed())
     }
+
+    override fun reverse(input: String): String = apply(input)
 }
 
 class RotateOperation(override val operation: String) : Operation {
@@ -67,6 +71,14 @@ class RotateOperation(override val operation: String) : Operation {
             "left" -> rotateLeft(input, words[2].toInt())
             "right" -> rotateRight(input, words[2].toInt())
             else -> rotateBasedOn(input, words[6])
+        }
+    }
+
+    override fun reverse(input: String): String {
+        return when(words[1]) {
+            "left" -> rotateRight(input, words[2].toInt())
+            "right" -> rotateLeft(input, words[2].toInt())
+            else -> reverseBasedOn(input, words[6])
         }
     }
 
@@ -84,14 +96,19 @@ class RotateOperation(override val operation: String) : Operation {
         val index = input.indexOfFirst { it.toString() == letter }
         return rotateRight(input, 1 + index + if (index >= 4) 1 else 0)
     }
+
+    private fun reverseBasedOn(input: String, s: String): String =
+        generateSequence(input) {rotateLeft(it, 1)}.find { rotateBasedOn(it, s) == input }
+            ?: throw IllegalArgumentException("RotateOperation cannot be reversed")
 }
 
 class MoveOperation(override val operation: String) : Operation {
-    override fun apply(input: String): String {
-        val xPos = words[2].toInt()
-        val yPos = words[5].toInt()
-        val letter = input.substring(xPos, xPos + 1)
-        val remainingInput = input.take(xPos) + input.substring(xPos + 1)
-        return remainingInput.substring(0, yPos) + letter + remainingInput.substring(yPos)
+    override fun apply(input: String): String = move(input, words[2].toInt(), words[5].toInt())
+    override fun reverse(input: String): String = move(input, words[5].toInt(), words[2].toInt())
+
+    private fun move(input: String, source: Int, dest: Int): String {
+        val letter = input.substring(source, source + 1)
+        val remainingInput = input.take(source) + input.substring(source + 1)
+        return remainingInput.substring(0, dest) + letter + remainingInput.substring(dest)
     }
 }
