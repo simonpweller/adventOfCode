@@ -3,7 +3,7 @@ import kotlin.math.abs
 data class Point(val x: Int, val y: Int) {
     val neighbors: List<Point>
         get() = RelativeDirection.values().map { this + it }
-    fun manhattan() = abs(x) + abs(y)
+    fun manhattan(point: Point = Point(0, 0) ) = abs(x - point.x) + abs(y - point.y)
 
     operator fun plus(direction: RelativeDirection): Point = when(direction) {
         RelativeDirection.U -> this.copy(y = y + 1)

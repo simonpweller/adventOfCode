@@ -3,6 +3,7 @@ package y2016.day22
 import Point
 import resourceLines
 import subListsOfSize
+import java.util.*
 
 fun main() {
     val nodeLines = resourceLines(2016, 22).drop(2)
@@ -13,11 +14,12 @@ fun main() {
 private fun part2(nodeLines: List<String>): Int {
     val nodeMap = createNodeMap(nodeLines)
     val maxX = nodeMap.keys.map { it.x }.max() ?: error("no max for x found")
-    var gameStates = listOf(GameState(nodeMap, 0, Point(maxX, 0)))
-    while (gameStates.none { it.dataLocation == Point(0, 0) }) {
-        gameStates = gameStates.flatMap { gameState -> getNextStates(gameState) }
+    val queue = PriorityQueue<GameState>(GameStateComparator())
+    queue.add(GameState(nodeMap, 0, Point(maxX, 0)))
+    while (queue.peek().dataLocation != Point(0, 0)) {
+        queue.addAll(getNextStates(queue.remove()))
     }
-    return gameStates.find { it.dataLocation == Point(0, 0) }!!.moves
+    return queue.peek().moves
 }
 
 private fun part1(nodeLines: List<String>) =
@@ -60,3 +62,8 @@ private data class Node(val used: Int, val available: Int) {
 
 private data class Move(val from: Point, val to: Point)
 private data class GameState(val nodeMap: Map<Point, Node>, val moves: Int, val dataLocation: Point)
+
+private class GameStateComparator: Comparator<GameState> {
+    override fun compare(o1: GameState, o2: GameState): Int =
+        (o1.moves + o1.dataLocation.manhattan()) - (o2.moves + o2.dataLocation.manhattan())
+}
