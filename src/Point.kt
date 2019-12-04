@@ -1,6 +1,8 @@
 import kotlin.math.abs
 
 data class Point(val x: Int, val y: Int) {
+    val neighbors: List<Point>
+        get() = RelativeDirection.values().map { this + it }
     fun manhattan() = abs(x) + abs(y)
 
     operator fun plus(direction: RelativeDirection): Point = when(direction) {
