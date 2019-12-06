@@ -3,20 +3,34 @@ package y2019.day6
 import resourceLines
 
 fun main() {
-    val map = resourceLines(2019, 6).fold(mapOf<String, List<String>>()) { map, line ->
+    val map = resourceLines(2019, 6).fold<String, Map<String, List<String>>>(mapOf()) { map, line ->
         val (planet, moon) = line.split(")")
         map.plus(Pair(planet, map.getOrDefault(planet, listOf()).plus(moon)))
     }
-    println(map.keys.sumBy { objectsInOrbit(map, it) })
-    println(objectsBetweenCOMAnd(map, "YOU"))
+    val orbitMap = OrbitMap(map)
+    println(orbitMap.objectsInOrbit())
+    println(orbitMap.orbitalJumpsBetween("YOU", "SAN") - 2)
 }
 
-fun objectsInOrbit(map: Map<String, List<String>>, center: String): Int {
-    val directlyInOrbit = map.getOrDefault(center, listOf())
-    return directlyInOrbit.size + directlyInOrbit.map { objectsInOrbit(map, it) }.sum()
-}
+class OrbitMap(private val map: Map<String, List<String>>) {
+    fun objectsInOrbit(): Int = map.keys.sumBy(::objectsInOrbit)
 
-fun objectsBetweenCOMAnd(map: Map<String, List<String>>, center: String): List<String> {
-    if (center == "COM") return listOf()
-    return listOf(center).plus(objectsBetweenCOMAnd(map, map.filterValues { it.contains(center) }.keys.first()))
+    fun orbitalJumpsBetween(obj1: String, obj2: String): Int {
+        val route1 = routeToCOM(obj1)
+        val route2 = routeToCOM(obj2)
+        val firstSharedCenter = route1.first { route2.contains(it) }
+        return route1.indexOf(firstSharedCenter) + route2.indexOf(firstSharedCenter)
+    }
+
+    private fun objectsInOrbit(obj: String): Int {
+        val directlyInOrbit = map.getOrDefault(obj, listOf())
+        return directlyInOrbit.size + directlyInOrbit.map(::objectsInOrbit).sum()
+    }
+
+    private fun routeToCOM(obj: String): List<String> {
+        if (obj == "COM") return listOf()
+        return listOf(obj).plus(routeToCOM(centerOf(obj) ?: error("No route found")))
+    }
+
+    private fun centerOf(obj: String): String? = map.entries.find { it.value.contains(obj) }?.key
 }
