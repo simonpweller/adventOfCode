@@ -1,4 +1,4 @@
-package y2019.day4
+package y2019.day5
 
 import resourceText
 import y2019.IntComputer
