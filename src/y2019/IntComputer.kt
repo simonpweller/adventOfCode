@@ -3,15 +3,18 @@ package y2019
 class IntComputer(program: IntArray) {
     private val memory = program.clone()
     private var programCounter = 0
+    var isDone = false
     val inputs = mutableListOf<Int>()
-    val outputs = mutableListOf<Int>()
+    var outputs = mutableListOf<Int>()
 
     fun run(): IntComputer {
         while (opcode != 99) {
             when (opcode) {
                 1 -> add()
                 2 -> multiply()
-                3 -> input()
+                3 -> try {
+                    input()
+                } catch (e: IndexOutOfBoundsException) { return this }
                 4 -> output()
                 5 -> jumpIfTrue()
                 6 -> jumpIfFalse()
@@ -20,6 +23,7 @@ class IntComputer(program: IntArray) {
                 else -> throw IllegalArgumentException("opcode $opcode is not supported")
             }
         }
+        isDone = true
         return this
     }
 
@@ -30,6 +34,14 @@ class IntComputer(program: IntArray) {
     }
     fun setVerb(noun: Int): IntComputer {
         memory[2] = noun
+        return this
+    }
+    fun addInput(input: Int): IntComputer {
+        inputs.add(input)
+        return this
+    }
+    fun addInput(input: List<Int>): IntComputer {
+        inputs.addAll(input)
         return this
     }
 
