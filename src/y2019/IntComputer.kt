@@ -6,7 +6,7 @@ class IntComputer(program: IntArray) {
     val inputs = mutableListOf<Int>()
     val outputs = mutableListOf<Int>()
 
-    fun run(): Int {
+    fun run(): IntComputer {
         while (opcode != 99) {
             when (opcode) {
                 1 -> add()
@@ -20,7 +20,17 @@ class IntComputer(program: IntArray) {
                 else -> throw IllegalArgumentException("opcode $opcode is not supported")
             }
         }
-        return memory[0]
+        return this
+    }
+
+    fun readMemory0(): Int = memory[0]
+    fun setNoun(noun: Int): IntComputer {
+        memory[1] = noun
+        return this
+    }
+    fun setVerb(noun: Int): IntComputer {
+        memory[2] = noun
+        return this
     }
 
     private fun add() {
