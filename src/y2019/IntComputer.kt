@@ -1,7 +1,10 @@
 package y2019
 
-class IntComputer(private val memory: IntArray) {
+class IntComputer(program: IntArray) {
+    private val memory = program.clone()
     private var programCounter = 0
+    val inputs = mutableListOf<Int>()
+    val outputs = mutableListOf<Int>()
 
     fun run(): Int {
         while (opcode != 99) {
@@ -31,12 +34,12 @@ class IntComputer(private val memory: IntArray) {
     }
 
     private fun input() {
-        memory[memory[programCounter + 1]] = (readLine() ?: error("no input")).toInt()
+        memory[memory[programCounter + 1]] = inputs.removeAt(0)
         programCounter += 2
     }
 
     private fun output() {
-        println(operand1)
+        outputs.add(operand1)
         programCounter += 2
     }
 
