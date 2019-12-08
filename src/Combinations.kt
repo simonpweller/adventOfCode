@@ -3,15 +3,18 @@
  * permutations(1, 2, 3) -> [[3, 2, 1], [2, 3, 1], [3, 1, 2], [1, 3, 2], [2, 1, 3], [1, 2, 3]]
  */
 
-fun <T> permutations(items: Set<T>): List<List<T>> {
+fun <T> permutations(items: List<T>): List<List<T>> {
     if (items.size == 1) {
-        return listOf(listOf(items.first()))
+        return listOf(items)
     }
 
     return items
         .map { currentItem -> permutations(items.minus(currentItem)).map {it.plus(currentItem)}}
         .flatten()
 }
+
+fun <T> permutations(items: Set<T>): List<List<T>> = permutations(items.toList())
+fun permutations(items: IntRange): List<List<Int>> = permutations(items.toList())
 
 /**
  * Returns a list of lists covering all combinations of items in the first and second list

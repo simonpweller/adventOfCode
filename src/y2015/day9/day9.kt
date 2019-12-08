@@ -6,7 +6,7 @@ import resourceLines
 fun main() {
     val lines = resourceLines(2015, 9)
     val distances = parseDistances(lines)
-    val routes = permutations(distances.keys.toSet())
+    val routes = permutations(distances.keys)
     val routeDistances = routes.map { route ->
         var routeDistance = 0
         for (locationIndex in 1 until route.size) {
