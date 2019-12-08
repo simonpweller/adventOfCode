@@ -1,6 +1,5 @@
 package y2019.day8
 
-import intCount
 import resourceText
 
 fun main() {
@@ -10,5 +9,22 @@ fun main() {
 }
 
 private fun part1(image: Image) =
-    image.layers.map { layer -> intCount(layer) }.minBy { it.getOrDefault(BLACK, 0) }!!
-        .run { this.getOrDefault(WHITE, 0) * this.getOrDefault(TRANSPARENT, 0) }
+    image.layers
+        .minBy { it.count { pixel -> pixel == BLACK } }
+        ?.run { this.count { it == WHITE } * this.count { it == TRANSPARENT} }
+
+const val BLACK = 0
+const val WHITE = 1
+const val TRANSPARENT = 2
+const val FULL_BLOCK = "\u2588"
+
+class Image(pixels: List<Int>, private val width: Int = 25, height: Int = 6) {
+    val layers = pixels.chunked(width * height)
+    private fun getTopLayer(): List<Int> = layers.reduce { prev, curr ->
+        prev.zip(curr) { prevPixel, currPixel -> if (prevPixel == TRANSPARENT) currPixel else prevPixel}
+    }
+
+    override fun toString(): String =
+        getTopLayer().map { if (it == WHITE) FULL_BLOCK else " " }
+            .chunked(width).joinToString("\n") { line -> line.joinToString("") }
+}
