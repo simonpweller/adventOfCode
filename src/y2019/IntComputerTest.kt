@@ -25,4 +25,20 @@ internal class IntComputerTest {
         assertEquals(1000, IntComputer(program).addInput(8).run().outputs.first())
         assertEquals(1001, IntComputer(program).addInput(9).run().outputs.first())
     }
+
+    @Test
+    fun `large numbers and relative reading mode are handled`() {
+        assertEquals(
+            listOf<Long>(109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99),
+            IntComputer("109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99").run().outputs
+        )
+        assertEquals(
+            1219070632396864L,
+            IntComputer("1102,34915192,34915192,7,4,7,99,0").run().outputs.first()
+        )
+        assertEquals(
+            1125899906842624L,
+            IntComputer("104,1125899906842624,99").run().outputs.first()
+        )
+    }
 }
