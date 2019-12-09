@@ -56,7 +56,7 @@ class IntComputer(program: String) {
     }
 
     private fun input() {
-        memory[memory[programCounter + 1].toInt()] = inputs.removeAt(0)
+        memory[read(1, ReadingMode.IMMEDIATE).toInt()] = inputs.removeAt(0)
         programCounter += 2
     }
 
@@ -83,21 +83,36 @@ class IntComputer(program: String) {
         programCounter += 4
     }
 
+    private val instruction: String
+        get() = memory[programCounter].toString().padStart(4, '0')
+    private val readingModes: List<ReadingMode>
+        get() = instruction.take(2).map { ReadingMode.from(it) }
     private val opcode: Int
-        get() = memory[programCounter].toString().padStart(2, '0').takeLast(2).toInt()
+        get() = instruction.takeLast(2).toInt()
     private val operand1: Long
-        get() {
-            val mode = memory[programCounter].toString().padStart(3, '0').takeLast(3).take(1).toInt()
-            return if (mode == 1) memory[programCounter + 1] else memory[memory[programCounter + 1].toInt()]
-        }
+        get() = read(1, readingModes[1])
     private val operand2: Long
-        get() {
-            val mode = memory[programCounter].toString().padStart(4, '0').takeLast(4).take(1).toInt()
-            return if (mode == 1) memory[programCounter + 2] else memory[memory[programCounter + 2].toInt()]
-        }
+        get() = read(2, readingModes[0])
     private var target: Long
-        get() = memory[memory[programCounter + 3].toInt()]
+        get() = read(3, ReadingMode.IMMEDIATE)
         set(value) {
-            memory[memory[programCounter + 3].toInt()] = value
+            memory[read(3, ReadingMode.IMMEDIATE).toInt()] = value
         }
+    private fun read(offset: Int, readingMode: ReadingMode): Long = when(readingMode) {
+            ReadingMode.POSITION -> memory[memory[programCounter + offset].toInt()]
+            ReadingMode.IMMEDIATE -> memory[programCounter + offset]
+        }
+}
+
+enum class ReadingMode {
+    POSITION,
+    IMMEDIATE;
+
+    companion object {
+        fun from(char: Char) = when(char) {
+            '0' -> POSITION
+            '1' -> IMMEDIATE
+            else -> error("unknown reading mode")
+        }
+    }
 }
