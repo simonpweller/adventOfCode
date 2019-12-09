@@ -14,7 +14,7 @@ private fun part1(program: String) = IntComputer(program).setNoun(12).setVerb(2)
 private fun part2(program: String): Int {
     (0 .. 99).forEach { noun ->
         (0 .. 99).forEach { verb ->
-                if (IntComputer(program).setNoun(noun).setVerb(verb).run().readMemory0() == 19690720) {
+                if (IntComputer(program).setNoun(noun).setVerb(verb).run().readMemory0() == 19690720L) {
                     return 100 * noun + verb
                 }
         }

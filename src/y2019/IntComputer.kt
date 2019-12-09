@@ -1,11 +1,11 @@
 package y2019
 
 class IntComputer(program: String) {
-    private val memory = program.split(",").map { it.toInt() }.toIntArray()
+    private val memory = program.split(",").map { it.toLong() }.toLongArray()
     private var programCounter = 0
     var isDone = false
-    val inputs = mutableListOf<Int>()
-    var outputs = mutableListOf<Int>()
+    val inputs = mutableListOf<Long>()
+    var outputs = mutableListOf<Long>()
 
     fun run(): IntComputer {
         while (opcode != 99) {
@@ -27,20 +27,20 @@ class IntComputer(program: String) {
         return this
     }
 
-    fun readMemory0(): Int = memory[0]
+    fun readMemory0(): Long = memory[0]
     fun setNoun(noun: Int): IntComputer {
-        memory[1] = noun
+        memory[1] = noun.toLong()
         return this
     }
-    fun setVerb(noun: Int): IntComputer {
-        memory[2] = noun
+    fun setVerb(verb: Int): IntComputer {
+        memory[2] = verb.toLong()
         return this
     }
-    fun addInput(input: Int): IntComputer {
+    fun addInput(input: Long): IntComputer {
         inputs.add(input)
         return this
     }
-    fun addInput(input: List<Int>): IntComputer {
+    fun addInput(input: List<Long>): IntComputer {
         inputs.addAll(input)
         return this
     }
@@ -56,7 +56,7 @@ class IntComputer(program: String) {
     }
 
     private fun input() {
-        memory[memory[programCounter + 1]] = inputs.removeAt(0)
+        memory[memory[programCounter + 1].toInt()] = inputs.removeAt(0)
         programCounter += 2
     }
 
@@ -66,11 +66,11 @@ class IntComputer(program: String) {
     }
 
     private fun jumpIfTrue() {
-        if (operand1 != 0) programCounter = operand2 else programCounter += 3
+        if (operand1 != 0L) programCounter = operand2.toInt() else programCounter += 3
     }
 
     private fun jumpIfFalse() {
-        if (operand1 == 0) programCounter = operand2 else programCounter += 3
+        if (operand1 == 0L) programCounter = operand2.toInt() else programCounter += 3
     }
 
     private fun lessThan() {
@@ -85,19 +85,19 @@ class IntComputer(program: String) {
 
     private val opcode: Int
         get() = memory[programCounter].toString().padStart(2, '0').takeLast(2).toInt()
-    private val operand1: Int
+    private val operand1: Long
         get() {
             val mode = memory[programCounter].toString().padStart(3, '0').takeLast(3).take(1).toInt()
-            return if (mode == 1) memory[programCounter + 1] else memory[memory[programCounter + 1]]
+            return if (mode == 1) memory[programCounter + 1] else memory[memory[programCounter + 1].toInt()]
         }
-    private val operand2: Int
+    private val operand2: Long
         get() {
             val mode = memory[programCounter].toString().padStart(4, '0').takeLast(4).take(1).toInt()
-            return if (mode == 1) memory[programCounter + 2] else memory[memory[programCounter + 2]]
+            return if (mode == 1) memory[programCounter + 2] else memory[memory[programCounter + 2].toInt()]
         }
-    private var target: Int
-        get() = memory[memory[programCounter + 3]]
+    private var target: Long
+        get() = memory[memory[programCounter + 3].toInt()]
         set(value) {
-            memory[memory[programCounter + 3]] = value
+            memory[memory[programCounter + 3].toInt()] = value
         }
 }
