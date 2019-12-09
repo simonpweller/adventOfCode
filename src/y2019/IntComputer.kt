@@ -1,8 +1,7 @@
 package y2019
 
-class IntComputer(program: IntArray) {
-    constructor(program: String): this(program.split(",").map { it.toInt() }.toIntArray())
-    private val memory = program.clone()
+class IntComputer(program: String) {
+    private val memory = program.split(",").map { it.toInt() }.toIntArray()
     private var programCounter = 0
     var isDone = false
     val inputs = mutableListOf<Int>()

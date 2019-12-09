@@ -5,19 +5,19 @@ import resourceText
 import y2019.IntComputer
 
 fun main() {
-    val program = resourceText(2019, 7).split(",").map { it.toInt() }.toIntArray()
+    val program = resourceText(2019, 7)
     println(permutations(0 .. 4).map { part1(it, program) }.max())
     println(permutations(5 .. 9).map { part2(it, program) }.max())
 }
 
-private fun part1(config: List<Int>, program: IntArray): Int {
+private fun part1(config: List<Int>, program: String): Int {
     val amplifiers = config.map { IntComputer(program).addInput(it) }
     return amplifiers.fold(0) { acc, curr ->
         curr.addInput(acc).run().outputs.first()
     }
 }
 
-private fun part2(config: List<Int>, program: IntArray): Int {
+private fun part2(config: List<Int>, program: String): Int {
     val amplifiers = config.map { IntComputer(program).addInput(it) }
     var output = listOf(0)
     while (!amplifiers.last().isDone) {
