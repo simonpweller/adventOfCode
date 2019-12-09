@@ -93,40 +93,40 @@ class IntComputer(program: String) {
 
     private val instruction: String
         get() = memory[programCounter].toString().padStart(5, '0')
-    private val readingModes: List<ReadingMode>
-        get() = instruction.take(3).map { ReadingMode.from(it) }
+    private val parameterModes: List<ParameterMode>
+        get() = instruction.take(3).map { ParameterMode.from(it) }
     private val opcode: Int
         get() = instruction.takeLast(2).toInt()
     private var operand1: Long
-        get() = read(1, readingModes[2])
+        get() = read(1, parameterModes[2])
         set(value) {
-            write(1, readingModes[2], value)
+            write(1, parameterModes[2], value)
         }
     private var operand2: Long
-        get() = read(2, readingModes[1])
+        get() = read(2, parameterModes[1])
         set(value) {
-            write(2, readingModes[1], value)
+            write(2, parameterModes[1], value)
         }
     private var operand3: Long
-        get() = read(3, readingModes[0])
+        get() = read(3, parameterModes[0])
         set(value) {
-            write(3, readingModes[0], value)
+            write(3, parameterModes[0], value)
         }
-    private fun read(offset: Int, readingMode: ReadingMode): Long = when(readingMode) {
-            ReadingMode.POSITION -> memory.getOrDefault(read(offset, ReadingMode.IMMEDIATE), 0L)
-            ReadingMode.IMMEDIATE -> memory.getOrDefault(programCounter + offset, 0L)
-            ReadingMode.RELATIVE -> memory.getOrDefault(read(offset, ReadingMode.IMMEDIATE) + relativeBase, 0L)
+    private fun read(offset: Int, parameterMode: ParameterMode): Long = when(parameterMode) {
+            ParameterMode.POSITION -> memory.getOrDefault(read(offset, ParameterMode.IMMEDIATE), 0L)
+            ParameterMode.IMMEDIATE -> memory.getOrDefault(programCounter + offset, 0L)
+            ParameterMode.RELATIVE -> memory.getOrDefault(read(offset, ParameterMode.IMMEDIATE) + relativeBase, 0L)
         }
-    private fun write(offset: Int, readingMode: ReadingMode, value: Long) {
-        when(readingMode) {
-            ReadingMode.POSITION -> memory[read(offset, ReadingMode.IMMEDIATE)] = value
-            ReadingMode.IMMEDIATE -> throw NotImplementedError("writing in immediate mode is not supported")
-            ReadingMode.RELATIVE -> memory[read(offset, ReadingMode.IMMEDIATE) + relativeBase] = value
+    private fun write(offset: Int, parameterMode: ParameterMode, value: Long) {
+        when(parameterMode) {
+            ParameterMode.POSITION -> memory[read(offset, ParameterMode.IMMEDIATE)] = value
+            ParameterMode.IMMEDIATE -> throw NotImplementedError("writing in immediate mode is not supported")
+            ParameterMode.RELATIVE -> memory[read(offset, ParameterMode.IMMEDIATE) + relativeBase] = value
         }
     }
 }
 
-enum class ReadingMode {
+enum class ParameterMode {
     POSITION,
     IMMEDIATE,
     RELATIVE;
