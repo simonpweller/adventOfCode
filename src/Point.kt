@@ -1,4 +1,6 @@
+
 import kotlin.math.abs
+import kotlin.math.sign
 
 data class Point(val x: Int, val y: Int) {
     val neighbors: List<Point>
@@ -10,6 +12,16 @@ data class Point(val x: Int, val y: Int) {
         RelativeDirection.D -> this.copy(y = y - 1)
         RelativeDirection.L -> this.copy(x = x - 1)
         RelativeDirection.R -> this.copy(x = x + 1)
+    }
+
+    operator fun minus(point: Point): Vector = Vector(this.x - point.x, this.y - point.y)
+}
+
+data class Vector(val x: Int, val y: Int) {
+    fun reduce(): Vector {
+        if (x.sign == 0 || y.sign == 0) return Vector(x.sign, y.sign)
+        val gcd = x.toBigInteger().gcd(y.toBigInteger()).toInt()
+        return Vector(x / gcd, y / gcd)
     }
 }
 
