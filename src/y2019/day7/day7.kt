@@ -13,7 +13,7 @@ fun main() {
 private fun part1(config: List<Int>, program: String): Long {
     val amplifiers = config.map { IntComputer(program).addInput(it.toLong()) }
     return amplifiers.fold(0L) { acc, curr ->
-        curr.addInput(acc).run().outputs.first()
+        curr.addInput(acc).run().takeOutput()
     }
 }
 
@@ -21,9 +21,7 @@ private fun part2(config: List<Int>, program: String): Long {
     val amplifiers = config.map { IntComputer(program).addInput(it.toLong()) }
     var output = listOf(0L)
     while (!amplifiers.last().isDone) {
-        output = amplifiers.fold(output) { acc, curr ->
-            curr.addInput(acc).run().outputs.also { curr.outputs = mutableListOf() }
-        }
+        output = amplifiers.fold(output) { acc, curr -> curr.addInput(acc).run().takeOutputs() }
     }
     return output.first()
 }

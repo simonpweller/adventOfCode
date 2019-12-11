@@ -29,7 +29,6 @@ class IntComputer(program: String) {
         return this
     }
 
-
     fun readMemory0(): Long = memory.getOrElse(0) { 0L }
     fun setNoun(noun: Int): IntComputer {
         memory[1] = noun.toLong()
@@ -46,6 +45,14 @@ class IntComputer(program: String) {
     fun addInput(input: List<Long>): IntComputer {
         inputs.addAll(input)
         return this
+    }
+    fun takeOutputs(): List<Long> {
+        val copy = outputs.toList()
+        outputs.clear()
+        return copy
+    }
+    fun takeOutput(): Long {
+        return outputs.take(1).first()
     }
 
     private fun add() {

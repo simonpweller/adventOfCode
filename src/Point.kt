@@ -29,5 +29,22 @@ enum class RelativeDirection {
     U,
     D,
     L,
-    R
+    R;
+
+    operator fun plus(direction: RelativeDirection): RelativeDirection = when(direction) {
+        U -> error("can't turn up")
+        D -> error("can't turn down")
+        L -> when(this) {
+            U -> L
+            D -> R
+            L -> D
+            R -> U
+        }
+        R -> when(this) {
+            U -> R
+            D -> L
+            L -> U
+            R -> D
+        }
+    }
 }
