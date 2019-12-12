@@ -8,6 +8,21 @@ import kotlin.math.sign
 fun main() {
     val moons = resourceLines(2019, 12).map(::createMoon)
     println(simulate(moons, 1000).sumBy { it.energy })
+    println(part2(moons))
+}
+
+private fun part2(moons: List<Moon>): Int {
+    val moonPairs = subListsOfSize(moons, 2).map { Pair(it.first(), it.last()) }
+    val previousStates = mutableMapOf<String, Int>()
+    var steps = 0
+    while (previousStates.putIfAbsent(moons.toString(), steps) == null) {
+        moonPairs.forEach {
+            it.first.pullTowards(it.second)
+        }
+        moons.forEach { it.move() }
+        steps++
+    }
+    return steps
 }
 
 private fun simulate(moons: List<Moon>, steps: Int): List<Moon> {
