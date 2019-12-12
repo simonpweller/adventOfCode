@@ -2,38 +2,45 @@ package y2019.day12
 
 import resourceLines
 import subListsOfSize
+import java.math.BigInteger
 import kotlin.math.abs
 import kotlin.math.sign
 
 fun main() {
-    val moons = resourceLines(2019, 12).map(::createMoon)
-    println(simulate(moons, 1000).sumBy { it.energy })
-    println(part2(moons))
+    println(part1(resourceLines(2019, 12).map(::createMoon)))
+    println(part2())
 }
 
-private fun part2(moons: List<Moon>): Int {
+private fun part1(moons: List<Moon>): Int {
     val moonPairs = subListsOfSize(moons, 2).map { Pair(it.first(), it.last()) }
-    val previousStates = mutableMapOf<String, Int>()
+    repeat(1000) {
+        moonPairs.forEach {
+            it.first.pullTowards(it.second)
+        }
+        moons.forEach { it.move() }
+    }
+    return moons.sumBy { it.energy }
+}
+
+private fun part2(): BigInteger {
+    val xCycleLength = findCycleLength(resourceLines(2019, 12).map(::createMoon)) { v3 -> v3.x }.toBigInteger()
+    val yCycleLength = findCycleLength(resourceLines(2019, 12).map(::createMoon)) { v3 -> v3.y }.toBigInteger()
+    val zCycleLength = findCycleLength(resourceLines(2019, 12).map(::createMoon)) { v3 -> v3.z }.toBigInteger()
+    return xCycleLength.lcm(yCycleLength).lcm(zCycleLength)
+}
+
+private fun findCycleLength(moons: List<Moon>, dim: (V3) -> Int): Int {
+    val moonPairs = subListsOfSize(moons, 2).map { Pair(it.first(), it.last()) }
     var steps = 0
-    while (previousStates.putIfAbsent(moons.toString(), steps) == null) {
+    val initial = moons.map { dim(it.position) }
+    do {
         moonPairs.forEach {
             it.first.pullTowards(it.second)
         }
         moons.forEach { it.move() }
         steps++
-    }
-    return steps
-}
-
-private fun simulate(moons: List<Moon>, steps: Int): List<Moon> {
-    val moonPairs = subListsOfSize(moons, 2).map { Pair(it.first(), it.last()) }
-    repeat(steps) {
-        moonPairs.forEach {
-            it.first.pullTowards(it.second)
-        }
-        moons.forEach { it.move() }
-    }
-    return moons
+    } while (moons.map {dim(it.position) } != initial)
+    return steps + 1
 }
 
 private fun createMoon(string: String): Moon {
@@ -66,3 +73,4 @@ private data class V3(val x: Int = 0, val y: Int = 0, val z: Int = 0) {
     operator fun plus(velocity: V3) = V3(x + velocity.x, y + velocity.y, z + velocity.z)
 }
 
+private fun BigInteger.lcm(other: BigInteger): BigInteger = this * other / this.gcd(other)
