@@ -4,10 +4,12 @@ import resourceText
 import y2019.IntComputer
 
 fun main() {
-    val intComp = IntComputer(resourceText(2019, 13))
+    println(part1(resourceText(2019, 13)))
+}
+
+private fun part1(program: String): Int {
+    val intComp = IntComputer(program)
     val screen = mutableMapOf<Pair<Long, Long>, Long>()
-    while (!intComp.isDone) {
-        intComp.run().takeOutputs().chunked(3).forEach { screen[Pair(it[0], it[1])] =  it[2] }
-    }
-    println(screen.values.count {it == 2L})
+    intComp.run().takeOutputs().chunked(3).forEach { screen[Pair(it[0], it[1])] = it[2] }
+    return screen.values.count { it == 2L }
 }
