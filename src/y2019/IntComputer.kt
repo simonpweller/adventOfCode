@@ -29,7 +29,11 @@ class IntComputer(program: String) {
         return this
     }
 
-    fun readMemory0(): Long = memory.getOrElse(0) { 0L }
+    var memory0: Long
+        get() = memory.getOrElse(0) { 0L }
+        set(value) {
+            memory[0] = value
+        }
     fun setNoun(noun: Int): IntComputer {
         memory[1] = noun.toLong()
         return this
