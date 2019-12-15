@@ -14,6 +14,13 @@ data class Point(val x: Int, val y: Int) {
         RelativeDirection.R -> this.copy(x = x + 1)
     }
 
+    operator fun plus(direction: CardinalDirection): Point = when(direction) {
+        CardinalDirection.N -> this.copy(y = y + 1)
+        CardinalDirection.S -> this.copy(y = y - 1)
+        CardinalDirection.W -> this.copy(x = x - 1)
+        CardinalDirection.E -> this.copy(x = x + 1)
+    }
+
     operator fun minus(point: Point): Vector = Vector(this.x - point.x, this.y - point.y)
 }
 
@@ -47,4 +54,11 @@ enum class RelativeDirection {
             R -> D
         }
     }
+}
+
+enum class CardinalDirection {
+    N,
+    E,
+    S,
+    W
 }

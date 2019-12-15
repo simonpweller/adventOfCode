@@ -56,7 +56,7 @@ class IntComputer(program: String) {
         return copy
     }
     fun takeOutput(): Long {
-        return outputs.take(1).first()
+        return outputs.removeAt(0)
     }
 
     private fun add() {
