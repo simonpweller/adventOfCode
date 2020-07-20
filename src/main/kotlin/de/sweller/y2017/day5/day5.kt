@@ -1,6 +1,6 @@
 package de.sweller.y2017.day5
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val offsets = resourceLines(2017, 5).map { it.toInt() }.toMutableList()

@@ -1,6 +1,6 @@
 package de.sweller.y2019.day14
 
-import resourceLines
+import de.sweller.resourceLines
 import kotlin.math.ceil
 
 fun main() {

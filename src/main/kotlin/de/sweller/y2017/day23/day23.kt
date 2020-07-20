@@ -3,7 +3,7 @@ package de.sweller.y2017.day23
 import de.sweller.cpu.Computer
 import de.sweller.cpu.Instruction
 import isPrime
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     Computer().execute(resourceLines(2017, 23).map(::readInstruction))

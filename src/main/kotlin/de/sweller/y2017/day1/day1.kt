@@ -1,6 +1,6 @@
 package de.sweller.y2017.day1
 
-import resourceText
+import de.sweller.resourceText
 
 fun main() {
     val input = resourceText(2017, 1)

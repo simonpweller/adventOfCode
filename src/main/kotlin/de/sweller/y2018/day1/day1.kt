@@ -1,6 +1,6 @@
 package de.sweller.y2018.day1
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val ints = resourceLines(2018, 1).map { it.toInt() }

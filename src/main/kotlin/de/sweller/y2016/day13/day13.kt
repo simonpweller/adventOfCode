@@ -1,6 +1,6 @@
 package de.sweller.y2016.day13
 
-import resourceText
+import de.sweller.resourceText
 
 fun main() {
     println(part1(resourceText(2016, 13).toInt()))

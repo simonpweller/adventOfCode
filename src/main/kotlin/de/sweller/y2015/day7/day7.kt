@@ -1,6 +1,6 @@
 package de.sweller.y2015.day7
 
-import resourceLines
+import de.sweller.resourceLines
 
 private const val MAX_SIGNAL = 65535
 

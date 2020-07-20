@@ -1,6 +1,6 @@
 package de.sweller.y2016.day20
 
-import resourceLines
+import de.sweller.resourceLines
 import java.lang.Long.max
 
 fun main() {

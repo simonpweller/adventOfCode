@@ -1,6 +1,6 @@
 package de.sweller.y2019.day1
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val moduleWeights = resourceLines(2019, 1).map { it.toInt() }

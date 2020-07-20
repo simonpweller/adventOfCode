@@ -2,7 +2,7 @@ package de.sweller.y2019.day11
 
 import Point
 import RelativeDirection
-import resourceText
+import de.sweller.resourceText
 import de.sweller.y2019.IntComputer
 
 const val FULL_BLOCK = "\u2588"

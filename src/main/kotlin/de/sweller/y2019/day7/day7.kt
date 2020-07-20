@@ -1,7 +1,7 @@
 package de.sweller.y2019.day7
 
 import permutations
-import resourceText
+import de.sweller.resourceText
 import de.sweller.y2019.IntComputer
 
 fun main() {

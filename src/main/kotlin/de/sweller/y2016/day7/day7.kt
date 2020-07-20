@@ -1,6 +1,6 @@
 package de.sweller.y2016.day7
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val ips = resourceLines(2016, 7).map { IP(it) }

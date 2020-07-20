@@ -1,6 +1,6 @@
 package de.sweller.y2016.day3
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val lines = resourceLines(2016, 3)

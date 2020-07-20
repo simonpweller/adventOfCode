@@ -1,6 +1,6 @@
 package de.sweller.y2017.day12
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val pipes = resourceLines(2017, 12).fold(mapOf<Int, List<Int>>()) { map, line ->

@@ -2,7 +2,7 @@ package de.sweller.y2015.day23
 
 import de.sweller.cpu.Computer
 import de.sweller.cpu.Instruction
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val instructions = resourceLines(2015, 23).map(::readInstruction)

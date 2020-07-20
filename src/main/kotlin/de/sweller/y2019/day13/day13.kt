@@ -1,10 +1,10 @@
 package de.sweller.y2019.day13
 
-import resourceText
+import de.sweller.resourceText
 import de.sweller.y2019.IntComputer
 
 fun main() {
-//    println(part1(resourceText(2019, 13)))
+//    println(part1(de.sweller.resourceText(2019, 13)))
     val targets = mutableListOf<Long>(17, 16, 16, 17, 10, 2, 6, 6, 4, 4, 10, 8, 8, 12, 12, 12, 12, 12, 12, 12, 12, 12,
         12, 12, 12, 12, 20, 20, 12, 12, 22, 22, 22, 22, 20, 18, 24, 32, 32, 14, 31, 30, 28, 28, 28, 28, 28, 28, 28, 28, 8, 29, 30,
         30, 26, 26, 30, 27, 20, 18, 18, 18, 18, 16, 16, 16, 16, 16,16,16,16,7,29,30,20,20,12,22,24,21,20, 26, 25, 24, 25, 20, 25, 3, 2, 30, 16, 29, 7, 16, 7, 29, 15, 14,

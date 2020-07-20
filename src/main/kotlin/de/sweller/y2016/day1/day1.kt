@@ -1,6 +1,6 @@
 package de.sweller.y2016.day1
 
-import resourceText
+import de.sweller.resourceText
 import kotlin.math.abs
 
 fun main() {

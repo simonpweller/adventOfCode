@@ -1,6 +1,6 @@
 package de.sweller.y2019.day6
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val map = resourceLines(2019, 6).fold<String, Map<String, List<String>>>(mapOf()) { map, line ->

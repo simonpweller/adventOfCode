@@ -1,6 +1,6 @@
 package de.sweller.y2017.day9
 
-import resourceText
+import de.sweller.resourceText
 
 fun main() {
     val garbageRegex = "<[^>]*>".toRegex()

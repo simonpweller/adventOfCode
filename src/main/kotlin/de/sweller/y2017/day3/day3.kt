@@ -1,6 +1,6 @@
 package de.sweller.y2017.day3
 
-import resourceText
+import de.sweller.resourceText
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.sqrt

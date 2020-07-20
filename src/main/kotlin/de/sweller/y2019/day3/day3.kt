@@ -2,7 +2,7 @@ package de.sweller.y2019.day3
 
 import Point
 import RelativeDirection
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val (wire1, wire2) = resourceLines(2019, 3).map(::wirePositions)

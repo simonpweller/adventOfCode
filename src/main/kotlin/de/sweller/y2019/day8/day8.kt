@@ -1,6 +1,6 @@
 package de.sweller.y2019.day8
 
-import resourceText
+import de.sweller.resourceText
 
 fun main() {
     val image = Image(resourceText(2019, 8).map { it.toString().toInt() })

@@ -2,7 +2,7 @@ package de.sweller.y2019.day10
 
 import Point
 import Vector
-import resourceLines
+import de.sweller.resourceLines
 import kotlin.math.sign
 
 fun main() {

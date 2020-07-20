@@ -1,7 +1,7 @@
 package de.sweller.y2015.day9
 
 import permutations
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val lines = resourceLines(2015, 9)

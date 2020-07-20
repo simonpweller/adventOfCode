@@ -1,7 +1,7 @@
 package de.sweller.y2017.day4
 
 import charCounts
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val passphrases = resourceLines(2017, 4).map { it.split(" ") }

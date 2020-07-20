@@ -1,10 +1,11 @@
 package de.sweller.y2017.day6
 
 import MutableInfiniteList
-import resourceText
+import de.sweller.resourceText
 
 fun main() {
-    val bank = MutableInfiniteList(resourceText(2017, 6).split("\\s+".toRegex())
+    val bank = MutableInfiniteList(
+        resourceText(2017, 6).split("\\s+".toRegex())
         .map { num -> num.toInt()}.toMutableList())
     val seenBanks = mutableMapOf<List<Int>, Int>()
     var redistributions = 0

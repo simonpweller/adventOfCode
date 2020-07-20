@@ -1,6 +1,6 @@
 package de.sweller.y2015.day24
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val packages = resourceLines(2015, 24).map { it.toInt() }.reversed()

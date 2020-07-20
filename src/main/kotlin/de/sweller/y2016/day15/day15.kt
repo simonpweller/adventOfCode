@@ -1,6 +1,6 @@
 package de.sweller.y2016.day15
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val discs = resourceLines(2016, 15).map { Disc(

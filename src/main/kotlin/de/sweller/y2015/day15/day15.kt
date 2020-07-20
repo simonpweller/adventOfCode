@@ -1,6 +1,6 @@
 package de.sweller.y2015.day15
 
-import resourceLines
+import de.sweller.resourceLines
 import weakCompositions
 
 

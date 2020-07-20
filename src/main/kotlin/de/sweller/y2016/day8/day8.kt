@@ -1,6 +1,6 @@
 package de.sweller.y2016.day8
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val screen = Screen(50, 6)

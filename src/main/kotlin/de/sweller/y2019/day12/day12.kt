@@ -1,6 +1,6 @@
 package de.sweller.y2019.day12
 
-import resourceLines
+import de.sweller.resourceLines
 import subListsOfSize
 import java.math.BigInteger
 import kotlin.math.abs

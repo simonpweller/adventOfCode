@@ -1,6 +1,6 @@
 package de.sweller.y2016.day10
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val instructions = resourceLines(2016, 10)

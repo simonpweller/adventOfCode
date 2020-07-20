@@ -1,6 +1,6 @@
 package de.sweller.y2015.day22
 
-import resourceLines
+import de.sweller.resourceLines
 import java.lang.Integer.MAX_VALUE
 import java.lang.Integer.max
 

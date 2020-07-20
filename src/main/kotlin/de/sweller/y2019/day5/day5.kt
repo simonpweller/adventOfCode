@@ -1,6 +1,6 @@
 package de.sweller.y2019.day5
 
-import resourceText
+import de.sweller.resourceText
 import de.sweller.y2019.IntComputer
 
 fun main() {

@@ -1,6 +1,6 @@
 package de.sweller.y2016.day2
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val directions = resourceLines(2016, 2).map { line -> line.map { Direction.valueOf(it.toString()) } }

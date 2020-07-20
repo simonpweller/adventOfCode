@@ -1,7 +1,7 @@
 package de.sweller.y2019.day4
 
 import digits
-import resourceText
+import de.sweller.resourceText
 
 fun main() {
     val (lowerBound, upperBound) = resourceText(2019, 4).split("-").map {it.toInt()}

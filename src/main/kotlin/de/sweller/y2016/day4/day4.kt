@@ -1,6 +1,6 @@
 package de.sweller.y2016.day4
 
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val validRooms = resourceLines(2016, 4).map(::Room).filter { it.isValid() }

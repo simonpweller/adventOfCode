@@ -1,7 +1,7 @@
 package de.sweller.y2015.day21
 
 import combinations
-import resourceLines
+import de.sweller.resourceLines
 import java.lang.Integer.max
 
 fun main() {

@@ -1,7 +1,7 @@
 package de.sweller.y2018.day3
 
 import Point
-import resourceLines
+import de.sweller.resourceLines
 
 fun main() {
     val claims = resourceLines(2018, 3).map(::Claim)

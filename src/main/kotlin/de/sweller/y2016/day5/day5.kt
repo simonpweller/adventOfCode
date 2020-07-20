@@ -1,6 +1,6 @@
 package de.sweller.y2016.day5
 
-import resourceText
+import de.sweller.resourceText
 import java.math.BigInteger
 import java.security.MessageDigest
 
