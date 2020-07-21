@@ -8,10 +8,12 @@ fun main() {
     val stringInput = resourceText(2017, 10)
     val lengths = stringInput.split(",").map { it.toInt() }
     println(hash(input, lengths)[0] * hash(input, lengths)[1])
-    println(hash(input, processInput(stringInput), 64).run(::processOutput))
+    println(knotHash(stringInput))
 }
 
 data class Hash(val values: List<Int>, val currentPosition: Int = 0, val skipSize: Int = 0)
+
+fun knotHash(string: String) = hash((0 until 256).toList(), processInput(string), 64).run(::processOutput)
 
 fun hash(values: List<Int>, lengths: List<Int>, rounds: Int = 1): List<Int> {
     var hash = Hash(values)
