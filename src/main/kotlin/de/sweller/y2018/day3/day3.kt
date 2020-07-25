@@ -1,6 +1,6 @@
 package de.sweller.y2018.day3
 
-import Point
+import de.sweller.Point
 import de.sweller.resourceLines
 
 fun main() {
@@ -16,6 +16,6 @@ private class Claim(claim: String) {
     private val right = left + claim.substringAfter(": ").substringBefore("x").toInt()
     private val bottom = top + claim.substringAfter("x").toInt()
 
-    fun squares(): List<Point> = (left until right).map { x -> (top until bottom).map { y -> Point(x, y)} }.flatten()
+    fun squares(): List<Point> = (left until right).map { x -> (top until bottom).map { y -> Point(x, y) } }.flatten()
     fun overlaps(other: Claim) = this.squares().intersect(other.squares()).isNotEmpty()
 }

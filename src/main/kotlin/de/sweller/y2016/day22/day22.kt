@@ -1,6 +1,6 @@
 package de.sweller.y2016.day22
 
-import Point
+import de.sweller.Point
 import de.sweller.resourceLines
 import subListsOfSize
 import java.util.*

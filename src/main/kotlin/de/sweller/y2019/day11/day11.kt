@@ -1,7 +1,7 @@
 package de.sweller.y2019.day11
 
-import Point
-import RelativeDirection
+import de.sweller.Point
+import de.sweller.RelativeDirection
 import de.sweller.resourceText
 import de.sweller.y2019.IntComputer
 

@@ -1,7 +1,7 @@
 package de.sweller.y2019.day15
 
-import CardinalDirection
-import Point
+import de.sweller.CardinalDirection
+import de.sweller.Point
 import de.sweller.resourceText
 import de.sweller.y2019.IntComputer
 import java.util.*

@@ -1,7 +1,7 @@
 package de.sweller.y2019.day10
 
-import Point
-import Vector
+import de.sweller.Point
+import de.sweller.Vector
 import de.sweller.resourceLines
 import kotlin.math.sign
 

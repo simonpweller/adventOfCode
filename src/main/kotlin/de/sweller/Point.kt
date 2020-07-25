@@ -1,3 +1,4 @@
+package de.sweller
 
 import kotlin.math.abs
 import kotlin.math.sign
